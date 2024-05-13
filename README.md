@@ -15,4 +15,4 @@ This was a simple project I made to get back into the coding groove and get JS c
 
 ## Author
 
-Created by [squib_channel](https://www.twitch.tv/squib_channel) - Check me out live on Twitch! Or another one of my [socials](https://linktr.ee/squibchannel)!
+Created by [squib_channel](https://www.twitch.tv/squib_channel) - Check me out live on Twitch! Or another one of my [socials](https://linktr.ee/squibchannel), thanks for stopping by!
