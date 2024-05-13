@@ -47,6 +47,22 @@ async function main() {
     return allPTags;
   }
 
+  function displayGuestData(dataStructure) {
+    guestDisplay.innerHTML = "";
+
+    const guestNameTitle = document.createElement("h3");
+    guestNameTitle.textContent = searchText;
+    guestDisplay.appendChild(guestNameTitle);
+
+    const guestDisplayData = createTTDiv(dataStructure);
+    guestDisplayData.forEach((ele, i) => {
+      const keyName = Object.keys(dataStructure)[i];
+      const humanReadableKeyName = convertToHumanReadable(keyName);
+      ele.textContent = humanReadableKeyName + `: ${ele.textContent}`;
+      guestDisplay.appendChild(ele);
+    });
+  }
+
   function displayError(statusCode) {
     const fetchError = document.createElement("h2");
     fetchError.id = "fetch-error";
@@ -57,6 +73,12 @@ async function main() {
 
   function prepareTrackerDiv() {
     const trackerDiv = createTTDiv(ttDataStructure);
+
+    const squibNameTitle = document.createElement("h2");
+    squibNameTitle.id = "squib-name-title";
+    squibNameTitle.textContent = "squib_channel";
+    squibDataDisplay.appendChild(squibNameTitle);
+
     squibData[0]
       ? trackerDiv.forEach((ele) => {
           squibDataDisplay.appendChild(ele);
@@ -103,8 +125,8 @@ async function main() {
   });
   let searchResults;
   let clonedTTDataStructure;
-  let guestDisplayData;
   const guestDisplay = document.getElementById("guest-display");
+  guestDisplay.style.display = "none";
 
   function convertToHumanReadable(key) {
     return key
@@ -117,25 +139,14 @@ async function main() {
     searchResults = await fetchTwitchTrackerData(searchText);
 
     if (searchResults[0]) {
+      guestDisplay.style.display = "grid";
       clonedTTDataStructure = { ...searchResults[0] };
       console.log([searchText, clonedTTDataStructure]);
       squibTextBox.value = "";
 
-      guestDisplay.innerHTML = "";
-
-      const guestNameTitle = document.createElement("h3");
-      guestNameTitle.textContent = searchText;
-      guestDisplay.appendChild(guestNameTitle);
-
-      guestDisplayData = createTTDiv(clonedTTDataStructure);
-      guestDisplayData.forEach((ele, i) => {
-        const keyName = Object.keys(clonedTTDataStructure)[i];
-        const humanReadableKeyName = convertToHumanReadable(keyName);
-        ele.textContent = humanReadableKeyName + `: ${ele.textContent}`;
-        guestDisplay.appendChild(ele);
-      });
+      displayGuestData(clonedTTDataStructure);
     } else {
-      console.log("Error occured during fetch");
+      console.log("bad fetch on guest data");
     }
   });
 }
