@@ -7,7 +7,6 @@ async function main() {
       const response = await fetch(endpoint);
 
       if (!response.ok) {
-        console.log(response.status);
         return [response.ok, response.status];
       }
 
@@ -71,10 +70,11 @@ async function main() {
     return squibData[0];
   }
 
+  const squibNameTitle = document.createElement("h2");
+
   function prepareTrackerDiv() {
     const trackerDiv = createTTDiv(ttDataStructure);
 
-    const squibNameTitle = document.createElement("h2");
     squibNameTitle.id = "squib-name-title";
     squibNameTitle.textContent = "squib_channel";
     squibDataDisplay.appendChild(squibNameTitle);
@@ -92,7 +92,8 @@ async function main() {
 
   if (!squibData[0]) {
     // If things go wrong you can do stuff here
-    console.log("it was baaaad");
+    squibNameTitle.style.display = "none";
+    document.getElementById("guest-display").style.display = "none";
   } else {
     function createSquibTextBox() {
       const textBox = document.createElement("textarea");

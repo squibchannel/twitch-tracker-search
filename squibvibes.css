@@ -19,11 +19,11 @@ html {
 #squib-title {
   margin: 0;
   font-size: 64px;
-  color: darkblue;
+  color: black;
 }
 
 #squib-name-title {
-  color: rebeccapurple;
+  color: #6441a5;
 }
 
 #squib-data-display,
@@ -70,4 +70,5 @@ html {
 
 #fetch-error {
   color: red;
+  grid-column: none;
 }
